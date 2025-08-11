@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: megashop-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: megashop-backend
@@ -14,10 +14,27 @@ spec:
     spec:
       containers:
       - name: backend
-        image: rajijay/megashop-backend:latest   
+        image: your-dockerhub-username/megashop-backend:latest
         ports:
         - containerPort: 5000
         env:
         - name: MONGO_URI
-          value: mongodb://megashop-mongo:27017/megashop
+          value: mongodb://admin:password@megashop-mongo:27017
+        - name: JWT_SECRET
+          value: mysecret
+        - name: NODE_ENV
+          value: production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: megashop-backend
+spec:
+  selector:
+    app: megashop-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: ClusterIP
+
 
