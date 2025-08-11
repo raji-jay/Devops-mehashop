@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: yourdockerhubusername/megashop-backend:latest
+        image: rajijay/megashop-backend:latest   
         ports:
         - containerPort: 5000
         env:
         - name: MONGO_URI
           value: mongodb://megashop-mongo:27017/megashop
+
