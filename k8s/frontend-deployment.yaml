@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mydockerhubuser/megashop-frontend:latest   # Replace mydockerhubuser here
+        image: rajijay/megashop-frontend:latest   # Replace mydockerhubuser here
         ports:
         - containerPort: 3000
