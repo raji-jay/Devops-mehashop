@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: megashop-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: megashop-backend
+  template:
+    metadata:
+      labels:
+        app: megashop-backend
+    spec:
+      containers:
+      - name: backend
+        image: yourdockerhubusername/megashop-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URI
+          value: mongodb://megashop-mongo:27017/megashop

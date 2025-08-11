@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: megashop-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: megashop-mongo
+  template:
+    metadata:
+      labels:
+        app: megashop-mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:6
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+      volumes:
+      - name: mongo-data
+        emptyDir: {}

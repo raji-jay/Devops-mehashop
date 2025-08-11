@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>DevOps MegaShop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    .product { border: 1px solid #ddd; padding: 1rem; margin: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <h1>DevOps MegaShop</h1>
+  <button id="seed">Seed Sample Products</button>
+  <div id="products"></div>
+
+  <script>
+    const api = '/api/products';
+    async function render() {
+      const res = await fetch(api);
+      const items = await res.json();
+      const root = document.getElementById('products');
+      root.innerHTML = items.map(p => '<div class="product"><strong>'+p.name+'</strong> — $'+p.price+'</div>').join('');
+    }
+    document.getElementById('seed').addEventListener('click', async () => {
+      await fetch('/api/seed', { method: 'POST' });
+      await render();
+    });
+    render();
+  </script>
+</body>
+</html>
