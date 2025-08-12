@@ -17,3 +17,6 @@ spec:
         image: rajijay/megashop-frontend:latest  
         ports:
         - containerPort: 3000
+        env:
+        - name: REACT_APP_API_URL
+          value: "http://megashop-backend:5000"
